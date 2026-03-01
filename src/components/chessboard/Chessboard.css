@@ -1,0 +1,92 @@
+/* Ensure HTML and body take full height to allow container to stretch */
+html, body, #root { /* Assuming your React app mounts to a div with id="root" */
+  height: 100%;
+  margin: 0;
+  overflow: hidden; /* Prevent scrolling if board slightly overflows due to borders/shadows */
+  padding: 0;
+}
+
+.chessboard-container {
+  align-items: center;
+  /* New: Background color for the space around the board */
+  background-color: #3f3f3f; /* Darker background to contrast with the board */
+  display: flex;
+  height: 100vh; /* Make container take full viewport height */
+  justify-content: center;
+  width: 100vw; /* Make container take full viewport width */
+}
+
+.chessboard {
+  /* Calculate square size based on the smaller of viewport width or height */
+  /* This ensures the board always fits within the screen, maintaining aspect ratio */
+  /* Adjusted for margin: Subtracting a fixed margin value (e.g., 40px) from the min dimension */
+  --square-size: calc((min(100vw, 100vh) - 40px) / 8); /* Adjust 40px as needed for margin */
+
+  border: 2px solid #333; /* Border around the entire board */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+  display: grid;
+  grid-template-columns: repeat(8, var(--square-size)); /* 8 columns, each 'square-size' wide */
+  grid-template-rows: repeat(8, var(--square-size));    /* 8 rows, each 'square-size' tall */
+  margin: 20px; /* Adds 20px margin on all sides around the board itself */
+}
+
+.square {
+  align-items: center;
+  display: flex;
+  font-size: 0.8em; /* For optional labels */
+  height: var(--square-size); /* Use the calculated square size */
+  justify-content: center;
+  position: relative; /* For optional labels positioning */
+  width: var(--square-size); /* Use the calculated square size */
+}
+
+.light {
+  background-color: #f0d9b5; /* Light square color (e.g., cream) */
+}
+
+.dark {
+  background-color: #b58863; /* Dark square color (e.g., brown) */
+}
+
+/* Optional: Styles for displaying rank/file labels on squares */
+.square-label-rank {
+  color: rgba(0, 0, 0, 0.3); /* Semi-transparent */
+  position: absolute;
+  right: 2px;
+  top: 2px;
+}
+
+.square-label-file {
+  bottom: 2px;
+  color: rgba(0, 0, 0, 0.3); /* Semi-transparent */
+  left: 2px;
+  position: absolute;
+}
+
+.square.selected-square {
+  background-color: rgba(255, 255, 0, 0.3);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.chessboard.piece-selected .square:not(:has(.piece)) {
+  cursor: pointer;
+}
+
+.square .piece {
+  cursor: pointer;
+}
+
+.valid-move-indicator {
+  background-color: rgb(255 173 20 / 70%);
+  border-radius: 50%;
+  content: '';
+  display: block;
+  height: 35%;
+  left: 50%;
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 35%;
+  z-index: 0;
+}
