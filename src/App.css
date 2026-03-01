@@ -1,9 +1,6 @@
-/* src/App.css */
-
 .App {
-  /* Set a background color for the entire application container */
-  background-color: #333; /* Dark gray background */
-  min-height: 100vh; /* Ensure it covers the full viewport height */
+  background-color: #333;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;

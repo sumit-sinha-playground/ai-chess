@@ -1,6 +1,6 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'; // Import BrowserRouter, Routes, Route, Navigate
+import { BrowserRouter, Routes, Route } from 'react-router-dom'; // Import BrowserRouter, Routes, Route, Navigate
 import GameController from './components/gamecontroller/GameController';
+import Home from './components/home/Home'; // Import the new Home component
 import './App.css';
 
 function App() {
@@ -11,8 +11,8 @@ function App() {
           {/* Route for the GameController component */}
           <Route path="/game" element={<GameController />} />
 
-          {/* Optional: Redirect root path to /game, or add a landing page */}
-          <Route path="/" element={<Navigate to="/game" replace />} />
+          {/* Route for the Home landing page */}
+          <Route path="/" element={<Home />} />
 
           {/* Optional: Add a 404 Not Found page */}
           <Route path="*" element={<div>404 Not Found</div>} />

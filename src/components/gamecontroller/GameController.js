@@ -16,15 +16,22 @@ function GameController() {
   const [currentPiecePositions, setCurrentPiecePositions] = useState(initialPiecePositions);
   const [searchParams] = useSearchParams(); // Hook to access query parameters
 
-  // Log the 'id' from the URL for demonstration
+  // Log the 'id' and 'color' from the URL for demonstration
   useEffect(() => {
     if (searchParams == null) return;
     const gameId = searchParams.get('id');
+    const selectedColor = searchParams.get('color');
+
     if (gameId) {
       console.log('Game ID from URL:', gameId);
       // You can use this gameId to load specific game state from a database, etc.
     } else {
       console.log('No game ID found in URL. Starting new game.');
+    }
+
+    if (selectedColor) {
+      console.log('Playing as:', selectedColor);
+      // We can use this to flip the board or determine who goes first
     }
   }, [searchParams]); // Re-run effect if searchParams change
 
